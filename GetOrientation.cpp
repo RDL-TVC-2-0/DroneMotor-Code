@@ -1,10 +1,6 @@
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BNO055.h>
-#include <utility/imumaths.h>
+#include "GetOrientation.h"
 
-double DEG_2_RAD = 0.01745329251; //trig functions require radians, BNO055 outputs degrees
-
-void orientation(float orient[6]) {
+void orientation(Adafruit_BNO055& bno, float orient[6]) {
 	// Create quaternion object and get quaternion data from BNO055
 	imu::Quaternion quat = bno.getQuat();
 

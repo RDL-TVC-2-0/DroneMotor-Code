@@ -33,8 +33,8 @@ void PIDcontrol(float orient[6], float dt, float& outputPitch, float& outputYaw)
 	float prop_yaw = kp_yaw*yaw_error;
 
 	// Integral error
-	int_pitch = int_pitch + (ki_pitch*pitch_error*dt);
-	int_yaw = int_yaw + (ki_yaw*yaw_error*dt);
+	int_pitch += ki_pitch*pitch_error*dt;
+	int_yaw += ki_yaw*yaw_error*dt;
 
 	// Derivative error
 	float der_pitch = kd_pitch*pitch_rate;

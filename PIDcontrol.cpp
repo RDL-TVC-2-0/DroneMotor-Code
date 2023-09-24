@@ -1,5 +1,13 @@
 #include "PIDcontrol.h"
 
+// Target Pitch and Yaw Angles
+double target_pitch = 0;
+double target_yaw = 0;
+
+// Initializing Integral Error
+double int_pitch = 0.0;
+double int_yaw = 0.0;
+
 void PIDcontrol(double orient[6], double dt, double& outputPitch, double& outputYaw) {
 	// Assign orientation values to pitch, yaw, pitch_rate, and yaw_rate variables
 	double pitch = orient[1];

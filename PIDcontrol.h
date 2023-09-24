@@ -11,14 +11,6 @@
 #define ki_yaw 0
 #define kd_yaw 0
 
-// Target Pitch and Yaw Angles
-double target_pitch = 0;
-double target_yaw = 0;
-
-// Initializing Integral Error
-double int_pitch = 0.0;
-double int_yaw = 0.0;
-
 void PIDcontrol(double orient[6], double dt, double& outputPitch, double& outputYaw);
 
 #endif

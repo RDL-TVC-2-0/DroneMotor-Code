@@ -1,3 +1,7 @@
+#include <utility/imumaths.h>
+
+double DEG_2_RAD = 0.01745329251; //trig functions require radians, BNO055 outputs degrees
+
 void orientation(float orient[6]) {
 	// Create quaternion object and get quaternion data from BNO055
 	imu::Quaternion quat = bno.getQuat();
@@ -59,7 +63,7 @@ void plotOrientation(float pitch, float yaw, float roll) {
 	Serial.print(pitch);
 	Serial.print(",");
 	Serial.print("Yaw:");
-	Serial.println(yaw);
+	Serial.print(yaw);
 	Serial.print(",");
 	Serial.print("Roll:");
 	Serial.println(roll);

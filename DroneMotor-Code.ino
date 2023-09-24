@@ -10,12 +10,13 @@
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 
+#include "PIDcontrol.h"
+
 
 File DataFile;
 
 #define BNO055_SAMPLERATE_DELAY_MS 10
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
-//Adafruit_BNO055 bno = Adafruit_BNO055(-1, 0x28, &Wire);
 
 #define SERVO_PIN_PITCH 2
 #define SERVO_PIN_YAW 3
@@ -37,7 +38,7 @@ void setup() {
 		while(true) delay(100);
 	}
 	Serial.println("SD Card initialized");
-	DataFile = SD.open("flightLog.txt", O_RDWR | O_CREAT | O_TRUNC);
+	//DataFile = SD.open("flightLog.txt", O_RDWR | O_CREAT | O_TRUNC);
 	//DataString = "";
 
 	// BNO055 setup

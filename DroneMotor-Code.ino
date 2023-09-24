@@ -124,6 +124,7 @@ void loop() {
 
 	Serial.print("DeltaT:");
 	Serial.print(deltaTime);
+	
 	Serial.print(",");
 	Serial.print("Pitch:");
 	Serial.print(orientationData.x());
@@ -150,7 +151,7 @@ void loop() {
 	Serial.print("OutputYaw:");
 	Serial.print(outputYaw);
 
-
 	Serial.println("\n");
+
 	while ((micros() - sampleTimer) < (BNO055_SAMPLERATE_DELAY_MS * 1000));
 }

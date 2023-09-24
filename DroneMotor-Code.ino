@@ -38,8 +38,7 @@ void setup() {
 		while(true) delay(100);
 	}
 	Serial.println("SD Card initialized");
-	//DataFile = SD.open("flightLog.txt", O_RDWR | O_CREAT | O_TRUNC);
-	//DataString = "";
+	DataFile = SD.open("flightLog.dat", FILE_WRITE_BEGIN);
 
 	// BNO055 setup
 	if (!bno.begin()) {
@@ -104,6 +103,28 @@ void loop() {
     //linearAccelData.z();
 
 
+	double orient[6];
+	orient[0] = orientationData.x();
+	orient[1] = orientationData.y();
+	orient[2] = orientationData.z();
+	orient[3] = gyroscopeData.x();
+	orient[4] = gyroscopeData.y();
+	orient[5] = gyroscopeData.z();
+
+
+	double outputPitch, outputYaw;
+	double deltaTime = (micros() - oldTime) / 1000000.0;
+    oldTime = micros();
+	PIDcontrol(orient, deltaTime, outputPitch, outputYaw);
+
+
+	servoPitch.write(outputPitch);
+	servoYaw.write(outputYaw);
+
+
+	Serial.print("DeltaT:");
+	Serial.print(deltaTime);
+	Serial.print(",");
 	Serial.print("Pitch:");
 	Serial.print(orientationData.x());
 	Serial.print(",");
@@ -121,25 +142,6 @@ void loop() {
 	Serial.print(",");
 	Serial.print("Roll*:");
 	Serial.print(gyroscopeData.z());
-
-
-	float orient[6];
-	orient[0] = orientationData.x();
-	orient[1] = orientationData.y();
-	orient[2] = orientationData.z();
-	orient[3] = gyroscopeData.x();
-	orient[4] = gyroscopeData.y();
-	orient[5] = gyroscopeData.z();
-
-
-	float outputPitch, outputYaw;
-	float deltaTime = (micros() - oldTime) / 1000000.0;
-    oldTime = micros();
-	PIDcontrol(orient, deltaTime, outputPitch, outputYaw);
-
-
-	servoPitch.write(outputPitch);
-	servoYaw.write(outputYaw);
 
 	Serial.print(",");
 	Serial.print("OutputPitch:");
